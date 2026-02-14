@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta San Valentín Interactiva</title>
+  <link rel="stylesheet" href="styles.css">
+ 
+
+</head>
+<body>
+  <div class="container">
+    <!-- SECCIÓN SOBRE (cambia según estado) -->
+    <div id="envelopeContainer" class="envelope">
+      <!-- Contenido cuando está CERRADO -->
+      <div id="closedContent" class="envelope-content">
+        <div class="closed-message">💘 ¡ABRIR! 💘</div>
+        <div class="closed-sub">Toque el botón</div>
+      </div>
+
+      <!-- Contenido cuando está ABIERTO (oculto inicialmente) -->
+      <div id="openedContent" class="letter-content">
+        <div class="heart-decoration">❤️ ❤️ ❤️</div>
+        <h1>¡Feliz Día de<br>San Valentín!</h1>
+        <p>Te quiero mucho ❤️</p>
+        <div class="heart-decoration">🌹 🍫 💌</div>
+      </div>
+    </div>
+
+    <!-- BOTÓN PARA ABRIR (siempre visible) -->
+    <button id="openLetterBtn" class="open-btn">
+      <span>💌</span> Abrir carta <span>💌</span>
+    </button>
+
+    <div class="footer-note">
+      ✨ Con mucho amor, para un día especial ✨
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+
+ 
+  <!-- Fuente Poppins (opcional, pero mejora la modernidad) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</body>
+</html>
