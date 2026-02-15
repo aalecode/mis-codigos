@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Feliz San Valentín</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at center, #2b0a3d, #000000 70%);
+        overflow-x: hidden;
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+        padding: 20px;
+    }
+
+    .contenedor {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #ff5ca2;
+        font-size: clamp(2.5rem, 12vw, 10rem);
+        text-align: center;
+        text-shadow: 0 0 30px #ff5ca2, 0 0 60px #ff5ca2, 0 0 90px #ff1493;
+        margin: 0;
+        animation: latir 2s infinite ease-in-out;
+        letter-spacing: clamp(2px, 1.5vw, 8px);
+        word-break: break-word;
+        line-height: 1.2;
+        display: inline-block;
+        padding: 10px;
+    }
+
+    @keyframes latir {
+        0% { transform: scale(1); text-shadow: 0 0 20px #ff5ca2; }
+        50% { transform: scale(1.05); text-shadow: 0 0 40px #ff5ca2, 0 0 80px #ff1493; }
+        100% { transform: scale(1); text-shadow: 0 0 20px #ff5ca2; }
+    }
+
+    .estrella {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: parpadeo 2s infinite alternate;
+        pointer-events: none;
+    }
+
+    @keyframes parpadeo {
+        0% { opacity: 0.2; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Media queries para ajustes específicos */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: clamp(2.2rem, 10vw, 6rem);
+            animation: latir-movil 2s infinite ease-in-out;
+        }
+        
+        @keyframes latir-movil {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+    }
+
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 9vw, 4rem);
+            text-shadow: 0 0 15px #ff5ca2, 0 0 30px #ff5ca2;
+        }
+    }
+
+    @media (max-width: 360px) {
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+    }
+
+    @media (orientation: landscape) and (max-height: 600px) {
+        h1 {
+            font-size: clamp(2rem, 15vh, 6rem);
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Estrellas de fondo -->
+<div id="estrellas"></div>
+
+<!-- Contenedor responsivo -->
+<div class="contenedor">
+    <h1>Feliz San Valentín ❤️</h1>
+</div>
+
+<script>
+    // Función para crear estrellas responsivas
+    function crearEstrellas() {
+        const contenedorEstrellas = document.getElementById('estrellas');
+        contenedorEstrellas.innerHTML = '';
+        
+        const anchoPantalla = window.innerWidth;
+        let numeroEstrellas = 300;
+        
+        if (anchoPantalla <= 480) {
+            numeroEstrellas = 150;
+        } else if (anchoPantalla <= 768) {
+            numeroEstrellas = 200;
+        } else if (anchoPantalla <= 1024) {
+            numeroEstrellas = 250;
+        }
+        
+        for(let i = 0; i < numeroEstrellas; i++) {
+            let estrella = document.createElement('div');
+            estrella.className = 'estrella';
+            estrella.style.top = Math.random() * 100 + '%';
+            estrella.style.left = Math.random() * 100 + '%';
+            
+            let tamañoBase = anchoPantalla <= 480 ? 2 : 3;
+            let tamaño = Math.random() * tamañoBase + 1;
+            estrella.style.width = tamaño + 'px';
+            estrella.style.height = tamaño + 'px';
+            
+            estrella.style.animationDuration = (Math.random() * 3 + 1) + 's';
+            estrella.style.animationDelay = (Math.random() * 2) + 's';
+            contenedorEstrellas.appendChild(estrella);
+        }
+    }
+
+    // Crear estrellas al cargar
+    crearEstrellas();
+
+    // Recrear estrellas cuando cambie el tamaño
+    let timeoutId;
+    window.addEventListener('resize', () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            crearEstrellas();
+        }, 200);
+    });
+
+    window.addEventListener('orientationchange', () => {
+        setTimeout(crearEstrellas, 100);
+    });
+</script>
+
+</body>
+</html>
